@@ -1,0 +1,14 @@
+html,
+body {
+  background-color: #ededed;
+}
+
+div,
+ul,
+li,
+p,
+img {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

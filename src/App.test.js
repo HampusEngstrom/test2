@@ -16,7 +16,7 @@ test('fetch mocked data failure', async () => {
     json: jest.fn().mockResolvedValue([]),
   });
   const { getByTestId } = render(<App />);
-  const successNode = await waitFor(() => getByTestId('success'));
+  const successNode = await waitFor(() => getByTestId('colleagues'));
   expect(successNode).toBeInTheDocument();
   jest.restoreAllMocks();
 });
