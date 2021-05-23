@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import { fetchData } from './api';
+import Spinner from './assets/loading_spinner.gif';
 import './App.css';
+import Colleagues from './Colleagues';
+
+const LoadingSpinner = () => (
+  <img src={Spinner} alt="loading spinner" />
+);
+
+const Error = () => (
+  <div data-testid="error">Something went wrong!</div>
+);
 
 function App() {
+  const [colleagues, setColleagues] = useState();
+  const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    async function fetchColleagues() {
+      try {
+        const data = await fetchData();
+        setColleagues(data);
+        setIsFetching(false);
+      } catch (error) {
+        setColleagues(null);
+        setIsFetching(false);
+      }
+    }
+    fetchColleagues();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isFetching && <LoadingSpinner />}
+      {!isFetching && colleagues && <Colleagues items={colleagues} />}
+      {!isFetching && !colleagues && <Error />}
     </div>
   );
 }
