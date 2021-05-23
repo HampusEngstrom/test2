@@ -68,3 +68,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Tasks
+
+\_design/accessibility
+
+- 2pt Responsive design, works on mobile and tablets
+- 1pt No UI framework used (such as Bootstrap, Ant)
+
+\_functionality
+
+- 1pt Sort by name and office
+- 2pt Only render a set of profiles using either infinity scroll, pagination or a load more button
+
+\_testing/QA
+
+- 2pt End-to-end testing (with an existing framework)
+- 2pt Unit tests for existing functionality (reasonable coverage)
