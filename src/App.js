@@ -16,7 +16,6 @@ function App() {
     async function fetchColleagues() {
       try {
         const data = await fetchData();
-        console.log(data);
         setColleagues(data);
         setIsFetching(false);
       } catch (error) {

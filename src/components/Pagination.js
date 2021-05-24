@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const PaginationList = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  max-width: 100%;
+  flex-wrap: wrap;
 
   li {
     cursor: pointer;
@@ -19,58 +21,44 @@ const PaginationList = styled.ul`
   }
 `;
 
-class Pagination extends React.PureComponent {
-  state = {
-    activePage: 0,
-    items: this.props.items.slice(
-      0,
-      this.props.nbrOfVisibleItems || 32,
-    ),
-  };
+const Pagination = (props) => {
+  const [activePage, setActivePage] = useState(0);
 
-  getPages = () => {
+  const items = props.items.slice(
+    props.nbrOfVisibleItems * activePage,
+    props.nbrOfVisibleItems * activePage + props.nbrOfVisibleItems,
+  );
+
+  const getPages = () => {
     const nbrOfPages = Math.ceil(
-      this.props.items.length / (this.props.nbrOfVisibleItems || 32),
+      props.items.length / (props.nbrOfVisibleItems || 32),
     );
 
     return new Array(nbrOfPages).fill(0);
   };
 
-  clickPagination = (activePage) => () => {
-    this.setState({
-      activePage,
-      items: this.props.items.slice(
-        this.props.nbrOfVisibleItems * activePage,
-        this.props.nbrOfVisibleItems * activePage +
-          this.props.nbrOfVisibleItems,
-      ),
-    });
+  const clickPagination = (activePage) => () => {
+    setActivePage(activePage);
     window.scrollTo(0, 0);
   };
 
-  render() {
-    const { items } = this.state;
-    const pages = this.getPages();
-    return (
-      <div>
-        {this.props.render({ items })}
-        <PaginationList data-testid="pagination-list">
-          {pages.map((_, index) => (
-            <li
-              key={index}
-              id={'page-' + index + 1}
-              onClick={this.clickPagination(index)}
-              className={
-                this.state.activePage === index ? 'active' : ''
-              }
-            >
-              {index + 1}
-            </li>
-          ))}
-        </PaginationList>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      {props.render({ items })}
+      <PaginationList data-testid="pagination-list">
+        {getPages().map((_, index) => (
+          <li
+            key={index}
+            id={'page-' + index + 1}
+            onClick={clickPagination(index)}
+            className={activePage === index ? 'active' : ''}
+          >
+            {index + 1}
+          </li>
+        ))}
+      </PaginationList>
+    </div>
+  );
+};
 
 export default Pagination;
