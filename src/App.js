@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { fetchData } from './api';
-import Spinner from './assets/loading_spinner.gif';
 import './App.css';
-import Colleagues from './Colleagues';
-
-const LoadingSpinner = () => (
-  <img src={Spinner} alt="loading spinner" />
-);
+import Colleagues from './layout/Colleagues';
+import LoadingSpinner from './components/LoadingSpinner';
 
 const Error = () => (
   <div data-testid="error">Something went wrong!</div>
@@ -20,6 +16,7 @@ function App() {
     async function fetchColleagues() {
       try {
         const data = await fetchData();
+        console.log(data);
         setColleagues(data);
         setIsFetching(false);
       } catch (error) {

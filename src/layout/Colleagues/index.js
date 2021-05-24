@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import SocialMediaButtons from './SocialMedia';
 
 const PersonContainer = styled.li`
   display: flex;
@@ -15,6 +16,7 @@ const PersonContainer = styled.li`
   img {
     width: 100%;
     border: 1px solid gray;
+    margin-bottom: 14px;
   }
 `;
 
@@ -24,18 +26,26 @@ const StyledList = styled.ul`
   flex-wrap: wrap;
   justify-content: space-evenly;
 `;
-const Name = styled.p`
-  padding: 16px 4px 4px 4px;
+const Text = styled.p`
+  padding: 4px;
 `;
-const Office = styled.p`
-  padding: 5px;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const Person = ({ item }) => (
   <PersonContainer>
     <img src={item.imagePortraitUrl} alt={'image of employee'} />
-    <Name>{item.name}</Name>
-    <Office>Office: {item.office}</Office>
+    <Row>
+      <Text>{item.name}</Text>
+      <SocialMediaButtons item={item} />
+    </Row>
+    <Row>
+      <Text>Office: {item.office}</Text>
+    </Row>
   </PersonContainer>
 );
 

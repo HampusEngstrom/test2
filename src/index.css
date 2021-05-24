@@ -1,8 +1,11 @@
 html,
 body {
   background-color: #ededed;
+  font-family: sans-serif;
 }
 
+html,
+body,
 div,
 ul,
 li,
