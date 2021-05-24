@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SocialMediaButtons from './SocialMedia';
+import Pagination from './../../components/Pagination';
 
 const PersonContainer = styled.li`
   display: flex;
@@ -11,7 +12,6 @@ const PersonContainer = styled.li`
   border: 1px solid black;
   flex-direction: column;
   padding: 12px 8px;
-  flex-grow: 1;
 
   img {
     width: 100%;
@@ -62,7 +62,11 @@ const Colleagues = (props) => {
   return (
     <div data-testid="colleagues">
       <h1>The fellowship of the tretton37</h1>
-      <List items={items} />
+      <Pagination
+        nbrOfVisibleItems={props.nbrOfVisibleItems || 32}
+        items={items}
+        render={({ items }) => <List items={items} />}
+      />
     </div>
   );
 };
