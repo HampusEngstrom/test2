@@ -13,6 +13,9 @@ const PaginationList = styled.ul`
     margin: 0 1px;
     color: white;
     list-style: none;
+    &.active {
+      background-color: #5d5d5d;
+    }
   }
 `;
 
@@ -42,6 +45,7 @@ class Pagination extends React.PureComponent {
           this.props.nbrOfVisibleItems,
       ),
     });
+    window.scrollTo(0, 0);
   };
 
   render() {
@@ -56,6 +60,9 @@ class Pagination extends React.PureComponent {
               key={index}
               id={'page-' + index + 1}
               onClick={this.clickPagination(index)}
+              className={
+                this.state.activePage === index ? 'active' : ''
+              }
             >
               {index + 1}
             </li>
