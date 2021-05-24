@@ -4,6 +4,7 @@ import {
   render,
   fireEvent,
   screen,
+  within,
   waitFor,
 } from '@testing-library/react';
 
@@ -15,14 +16,14 @@ test('empty items array', async () => {
   expect(getByTestId('list').children.length).toBe(0);
 });
 
-test('correct nbr of items: 3', async () => {
+test('render 1 item', async () => {
   const items = [{ name: 'name1', office: 'office1' }];
   const { getByTestId } = render(<Colleagues items={items} />);
 
   expect(getByTestId('list').children.length).toBe(1);
 });
 
-test('fetch mocked data failure', async () => {
+test('render 3 items', async () => {
   const items = [
     { name: 'name1', office: 'office1' },
     { name: 'name2', office: 'office2' },
@@ -33,7 +34,7 @@ test('fetch mocked data failure', async () => {
   expect(getByTestId('list').children.length).toBe(3);
 });
 
-test('social media', async () => {
+test('render social media', async () => {
   const items = [
     { name: 'name1', office: 'office1', twitter: 'twitter' },
   ];
@@ -42,7 +43,7 @@ test('social media', async () => {
   expect(getByTestId('TwitterIcon')).toBeInTheDocument();
 });
 
-test('pagination test', async () => {
+test('render and click pagination', async () => {
   const items = [
     { name: 'name1', office: 'office1' },
     { name: 'name2', office: 'office1' },
@@ -93,4 +94,84 @@ test('pagination test', async () => {
   expect(screen.queryByText('4').classList.contains('active')).toBe(
     true,
   );
+});
+
+test('render and sort list', async () => {
+  const items = [
+    { name: 'ddd', office: 'office1' },
+    { name: 'fff', office: 'office1' },
+    { name: 'aaa', office: 'office1' },
+    { name: 'bbb', office: 'office1' },
+    { name: 'ccc', office: 'office1' },
+    { name: 'ggg', office: 'office1' },
+    { name: 'ddd', office: 'office1' },
+    { name: 'eee', office: 'office1' },
+    { name: 'hhh', office: 'office1' },
+    { name: 'iii', office: 'office1' },
+  ];
+  const { getByTestId } = render(
+    <Colleagues items={items} nbrOfVisibleItems={4} />,
+  );
+
+  let listNode = await waitFor(() => getByTestId('list'));
+  let paginationListNode = await waitFor(() =>
+    getByTestId('pagination-list'),
+  );
+  expect(within(listNode.children[0]).getByText('ddd'));
+  expect(within(listNode.children[1]).getByText('fff'));
+  expect(within(listNode.children[2]).getByText('aaa'));
+  expect(listNode.children.length).toBe(4);
+  expect(paginationListNode.children.length).toBe(3);
+
+  fireEvent.change(getByTestId('select'), {
+    target: { value: 'name' },
+  });
+
+  listNode = await waitFor(() => getByTestId('list'));
+
+  expect(within(listNode.children[0]).getByText('aaa'));
+  expect(within(listNode.children[1]).getByText('bbb'));
+  expect(within(listNode.children[2]).getByText('ccc'));
+  expect();
+});
+
+test('render and sort list', async () => {
+  const items = [
+    { name: 'ddd', office: 'officeD' },
+    { name: 'fff', office: 'officeA' },
+    { name: 'aaa', office: 'officeC' },
+    { name: 'bbb', office: 'officeD' },
+    { name: 'ccc', office: 'officeA' },
+    { name: 'ggg', office: 'officeB' },
+    { name: 'ddd', office: 'officeF' },
+    { name: 'eee', office: 'officeG' },
+    { name: 'hhh', office: 'officeD' },
+    { name: 'iii', office: 'officeE' },
+  ];
+  const { getByTestId } = render(
+    <Colleagues items={items} nbrOfVisibleItems={4} />,
+  );
+
+  let listNode = await waitFor(() => getByTestId('list'));
+  let paginationListNode = await waitFor(() =>
+    getByTestId('pagination-list'),
+  );
+  expect(within(listNode.children[0]).getByText('Office: officeD'));
+  expect(within(listNode.children[1]).getByText('Office: officeA'));
+  expect(within(listNode.children[2]).getByText('Office: officeC'));
+  expect(within(listNode.children[3]).getByText('Office: officeD'));
+  expect(listNode.children.length).toBe(4);
+  expect(paginationListNode.children.length).toBe(3);
+
+  fireEvent.change(getByTestId('select'), {
+    target: { value: 'office' },
+  });
+
+  listNode = await waitFor(() => getByTestId('list'));
+
+  expect(within(listNode.children[0]).getByText('Office: officeA'));
+  expect(within(listNode.children[1]).getByText('Office: officeA'));
+  expect(within(listNode.children[2]).getByText('Office: officeB'));
+  expect(within(listNode.children[3]).getByText('Office: officeC'));
+  expect();
 });
