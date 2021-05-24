@@ -1,5 +1,6 @@
 export const TwitterIcon = () => (
   <svg
+    data-testid="TwitterIcon"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
@@ -11,6 +12,7 @@ export const TwitterIcon = () => (
 
 export const LinkedInIcon = () => (
   <svg
+    data-testid="LinkedInIcon"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
@@ -22,6 +24,7 @@ export const LinkedInIcon = () => (
 
 export const GitHubIcon = () => (
   <svg
+    data-testid="GitHubIcon"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
@@ -33,6 +36,7 @@ export const GitHubIcon = () => (
 
 export const StackOverflowIcon = () => (
   <svg
+    data-testid="StackOverflowIcon"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"

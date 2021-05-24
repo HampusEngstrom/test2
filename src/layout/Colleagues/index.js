@@ -37,7 +37,7 @@ const Row = styled.div`
 `;
 
 const Person = ({ item }) => (
-  <PersonContainer>
+  <PersonContainer data-testid="list-item">
     <img src={item.imagePortraitUrl} alt={'image of employee'} />
     <Row>
       <Text>{item.name}</Text>
@@ -50,9 +50,9 @@ const Person = ({ item }) => (
 );
 
 const List = ({ items }) => (
-  <StyledList>
-    {items.map((item) => (
-      <Person key={item.email} item={item} />
+  <StyledList data-testid="list">
+    {items.map((item, index) => (
+      <Person key={index} item={item} />
     ))}
   </StyledList>
 );
