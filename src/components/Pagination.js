@@ -7,6 +7,7 @@ const PaginationList = styled.ul`
   justify-content: center;
   max-width: 100%;
   flex-wrap: wrap;
+  margin: 30px 0;
 
   li {
     cursor: pointer;
