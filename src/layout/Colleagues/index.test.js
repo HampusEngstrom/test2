@@ -7,6 +7,8 @@ import {
   waitFor,
 } from '@testing-library/react';
 
+window.scrollTo = () => {};
+
 test('empty items array', async () => {
   const items = [];
   const { getByTestId } = render(<Colleagues items={items} />);
@@ -57,8 +59,6 @@ test('pagination test', async () => {
     <Colleagues items={items} nbrOfVisibleItems={3} />,
   );
 
-  // expect(getByTestId('list').children.length).toBe(3);
-  // expect(getByTestId('pagination-list').children.length).toBe(4);
   let listNode = await waitFor(() => getByTestId('list'));
   let paginationListNode = await waitFor(() =>
     getByTestId('pagination-list'),
@@ -68,6 +68,13 @@ test('pagination test', async () => {
   expect(paginationListNode.children.length).toBe(4);
   expect(screen.queryByText('name1')).toBeInTheDocument();
   expect(screen.queryByText('name10')).not.toBeInTheDocument();
+
+  expect(screen.queryByText('1').classList.contains('active')).toBe(
+    true,
+  );
+  expect(screen.queryByText('4').classList.contains('active')).toBe(
+    false,
+  );
 
   fireEvent.click(screen.queryByText('4'));
 
@@ -80,4 +87,10 @@ test('pagination test', async () => {
 
   expect(screen.queryByText('name1')).not.toBeInTheDocument();
   expect(screen.queryByText('name10')).toBeInTheDocument();
+  expect(screen.queryByText('1').classList.contains('active')).toBe(
+    false,
+  );
+  expect(screen.queryByText('4').classList.contains('active')).toBe(
+    true,
+  );
 });
