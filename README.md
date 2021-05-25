@@ -6,6 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `yarn`
+
+Installs the application.
+
 ### `yarn start`
 
 Runs the app in the development mode.\
@@ -85,3 +89,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 - 2pt End-to-end testing (with an existing framework)
 - 2pt Unit tests for existing functionality (reasonable coverage)
+
+# Design
+
+- App.js fetches the data and pass it on to Colleagues.js if successfully fetched. App.js conditionally renders the loading spinner during fetching, Colleagues if success and Error if data could not be fetched.
+- DropDown.js is made stateless, to be reusable and used as widely as possible.
+- Pagination.js takes a list as render prop and serves it a new modified list after the pagination component has performed its operations, like a container.
+- layout/Colleagues/ is the layout component with a useState hook for the items to be presented, in this case sorted.
+- Toolbar.js holds the sorting logic and all other logic that would be implemented in the "Potential filter and tools area". It serves its parent Colleagues with the updated items (sorted, filtered, etc).
+
+I've tried to test the components and features as much as possible, using unit tests, integration tests and e2e tests.
+
+# Backlog
+
+- Handling missing images
+- Loading spinner when loading colleagues
