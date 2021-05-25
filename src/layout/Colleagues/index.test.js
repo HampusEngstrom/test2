@@ -43,6 +43,77 @@ test('render social media', async () => {
   expect(getByTestId('TwitterIcon')).toBeInTheDocument();
 });
 
+test('render and click arrows in pagination', async () => {
+  const items = [
+    { name: 'name1', office: 'office1' },
+    { name: 'name2', office: 'office1' },
+    { name: 'name3', office: 'office1' },
+    { name: 'name4', office: 'office1' },
+    { name: 'name5', office: 'office1' },
+    { name: 'name6', office: 'office1' },
+    { name: 'name7', office: 'office1' },
+    { name: 'name8', office: 'office1' },
+    { name: 'name9', office: 'office1' },
+    { name: 'name10', office: 'office1' },
+  ];
+
+  const { getByTestId } = render(
+    <Colleagues items={items} nbrOfVisibleItems={2} />,
+  );
+
+  let listNode = await waitFor(() => getByTestId('list'));
+  let paginationListNode = await waitFor(() =>
+    getByTestId('pagination-list'),
+  );
+
+  expect(listNode.children.length).toBe(2);
+  expect(paginationListNode.children.length).toBe(7);
+  expect(screen.queryByText('name1')).toBeInTheDocument();
+  expect(screen.queryByText('name2')).toBeInTheDocument();
+  expect(screen.queryByText('name3')).not.toBeInTheDocument();
+  expect(screen.queryByText('name4')).not.toBeInTheDocument();
+
+  const prevBtn = getByTestId('prev-page');
+  const nextBtn = getByTestId('next-page');
+
+  fireEvent.click(prevBtn);
+
+  expect(screen.queryByText('name1')).toBeInTheDocument();
+  expect(screen.queryByText('name2')).toBeInTheDocument();
+  expect(screen.queryByText('name3')).not.toBeInTheDocument();
+  expect(screen.queryByText('name4')).not.toBeInTheDocument();
+
+  fireEvent.click(nextBtn);
+
+  expect(screen.queryByText('name1')).not.toBeInTheDocument();
+  expect(screen.queryByText('name2')).not.toBeInTheDocument();
+  expect(screen.queryByText('name3')).toBeInTheDocument();
+  expect(screen.queryByText('name4')).toBeInTheDocument();
+
+  fireEvent.click(screen.queryByText('4'));
+
+  expect(screen.queryByText('name5')).not.toBeInTheDocument();
+  expect(screen.queryByText('name6')).not.toBeInTheDocument();
+  expect(screen.queryByText('name7')).toBeInTheDocument();
+  expect(screen.queryByText('name8')).toBeInTheDocument();
+  expect(screen.queryByText('name9')).not.toBeInTheDocument();
+  expect(screen.queryByText('name10')).not.toBeInTheDocument();
+
+  fireEvent.click(nextBtn);
+
+  expect(screen.queryByText('name7')).not.toBeInTheDocument();
+  expect(screen.queryByText('name8')).not.toBeInTheDocument();
+  expect(screen.queryByText('name9')).toBeInTheDocument();
+  expect(screen.queryByText('name10')).toBeInTheDocument();
+
+  fireEvent.click(nextBtn);
+
+  expect(screen.queryByText('name7')).not.toBeInTheDocument();
+  expect(screen.queryByText('name8')).not.toBeInTheDocument();
+  expect(screen.queryByText('name9')).toBeInTheDocument();
+  expect(screen.queryByText('name10')).toBeInTheDocument();
+});
+
 test('render and click pagination', async () => {
   const items = [
     { name: 'name1', office: 'office1' },
@@ -66,7 +137,7 @@ test('render and click pagination', async () => {
   );
 
   expect(listNode.children.length).toBe(3);
-  expect(paginationListNode.children.length).toBe(4);
+  expect(paginationListNode.children.length).toBe(6);
   expect(screen.queryByText('name1')).toBeInTheDocument();
   expect(screen.queryByText('name10')).not.toBeInTheDocument();
 
@@ -84,7 +155,7 @@ test('render and click pagination', async () => {
     getByTestId('pagination-list'),
   );
   expect(listNode.children.length).toBe(1);
-  expect(paginationListNode.children.length).toBe(4);
+  expect(paginationListNode.children.length).toBe(6);
 
   expect(screen.queryByText('name1')).not.toBeInTheDocument();
   expect(screen.queryByText('name10')).toBeInTheDocument();
@@ -121,7 +192,7 @@ test('render and sort list', async () => {
   expect(within(listNode.children[1]).getByText('fff'));
   expect(within(listNode.children[2]).getByText('aaa'));
   expect(listNode.children.length).toBe(4);
-  expect(paginationListNode.children.length).toBe(3);
+  expect(paginationListNode.children.length).toBe(5);
 
   fireEvent.change(getByTestId('select'), {
     target: { value: 'name' },
@@ -161,7 +232,7 @@ test('render and sort list', async () => {
   expect(within(listNode.children[2]).getByText('Office: officeC'));
   expect(within(listNode.children[3]).getByText('Office: officeD'));
   expect(listNode.children.length).toBe(4);
-  expect(paginationListNode.children.length).toBe(3);
+  expect(paginationListNode.children.length).toBe(5);
 
   fireEvent.change(getByTestId('select'), {
     target: { value: 'office' },
