@@ -5,7 +5,9 @@ import Colleagues from './layout/Colleagues/Colleagues';
 import LoadingSpinner from './components/LoadingSpinner';
 
 const Error = () => (
-  <div data-testid="error">Something went wrong!</div>
+  <div data-testid="error">
+    <center>Something went wrong!</center>
+  </div>
 );
 
 function App() {

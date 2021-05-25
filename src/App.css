@@ -33,6 +33,10 @@
   }
 }
 
+.App {
+  height: 100%;
+}
+
 @media (max-width: 480px) {
   .App {
     min-width: 300px;

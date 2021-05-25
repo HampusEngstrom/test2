@@ -2,7 +2,7 @@ export const fetchData = () =>
   new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
       reject(new Error('Timeout'));
-    }, 3000);
+    }, 10000);
 
     fetch('https://api.1337co.de/v3/employees', {
       method: 'GET',
