@@ -46,7 +46,7 @@ export const StyledList = styled.ul`
   width: 100%;
   padding: 30px 0;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 5px;
 `;
 
