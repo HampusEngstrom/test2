@@ -1,4 +1,4 @@
-import Colleagues from './';
+import Colleagues from './Colleagues';
 
 import {
   render,
@@ -12,13 +12,13 @@ window.scrollTo = () => {};
 
 test('empty items array', async () => {
   const items = [];
-  const { getByTestId } = render(<Colleagues items={items} />);
+  const { getByTestId } = render(<Colleagues allItems={items} />);
   expect(getByTestId('list').children.length).toBe(0);
 });
 
 test('render 1 item', async () => {
   const items = [{ name: 'name1', office: 'office1' }];
-  const { getByTestId } = render(<Colleagues items={items} />);
+  const { getByTestId } = render(<Colleagues allItems={items} />);
 
   expect(getByTestId('list').children.length).toBe(1);
 });
@@ -29,7 +29,7 @@ test('render 3 items', async () => {
     { name: 'name2', office: 'office2' },
     { name: 'name3', office: 'office3' },
   ];
-  const { getByTestId } = render(<Colleagues items={items} />);
+  const { getByTestId } = render(<Colleagues allItems={items} />);
 
   expect(getByTestId('list').children.length).toBe(3);
 });
@@ -38,7 +38,7 @@ test('render social media', async () => {
   const items = [
     { name: 'name1', office: 'office1', twitter: 'twitter' },
   ];
-  const { getByTestId } = render(<Colleagues items={items} />);
+  const { getByTestId } = render(<Colleagues allItems={items} />);
 
   expect(getByTestId('TwitterIcon')).toBeInTheDocument();
 });
@@ -58,7 +58,7 @@ test('render and click arrows in pagination', async () => {
   ];
 
   const { getByTestId } = render(
-    <Colleagues items={items} nbrOfVisibleItems={2} />,
+    <Colleagues allItems={items} nbrOfVisibleItems={2} />,
   );
 
   let listNode = await waitFor(() => getByTestId('list'));
@@ -128,7 +128,7 @@ test('render and click pagination', async () => {
     { name: 'name10', office: 'office1' },
   ];
   const { getByTestId } = render(
-    <Colleagues items={items} nbrOfVisibleItems={3} />,
+    <Colleagues allItems={items} nbrOfVisibleItems={3} />,
   );
 
   let listNode = await waitFor(() => getByTestId('list'));
@@ -181,7 +181,7 @@ test('render and sort list', async () => {
     { name: 'iii', office: 'office1' },
   ];
   const { getByTestId } = render(
-    <Colleagues items={items} nbrOfVisibleItems={4} />,
+    <Colleagues allItems={items} nbrOfVisibleItems={4} />,
   );
 
   let listNode = await waitFor(() => getByTestId('list'));
@@ -220,7 +220,7 @@ test('render and sort list', async () => {
     { name: 'iii', office: 'officeE' },
   ];
   const { getByTestId } = render(
-    <Colleagues items={items} nbrOfVisibleItems={4} />,
+    <Colleagues allItems={items} nbrOfVisibleItems={4} />,
   );
 
   let listNode = await waitFor(() => getByTestId('list'));

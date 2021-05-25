@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchData } from './api';
 import './App.css';
-import Colleagues from './layout/Colleagues';
+import Colleagues from './layout/Colleagues/Colleagues';
 import LoadingSpinner from './components/LoadingSpinner';
 
 const Error = () => (
@@ -29,7 +29,9 @@ function App() {
   return (
     <div className="App">
       {isFetching && <LoadingSpinner />}
-      {!isFetching && colleagues && <Colleagues items={colleagues} />}
+      {!isFetching && colleagues && (
+        <Colleagues allItems={colleagues} />
+      )}
       {!isFetching && !colleagues && <Error />}
     </div>
   );
