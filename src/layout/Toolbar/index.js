@@ -5,7 +5,7 @@ import { sortBy } from './../../helpers';
 
 const Container = styled.div`
   background-color: white;
-  margin: 20px 30px;
+  margin: 20px 10px;
   padding: 0 20px;
   min-height: 50px;
   display: flex;

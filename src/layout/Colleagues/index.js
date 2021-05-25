@@ -12,7 +12,7 @@ import {
 
 const Person = ({ item }) => (
   <PersonContainer data-testid="list-item">
-    <img src={item.imagePortraitUrl} alt={'image of employee'} />
+    <img src={item.imagePortraitUrl} alt={'employee'} />
     <Row>
       <Text>{item.name}</Text>
       <SocialMediaButtons item={item} />

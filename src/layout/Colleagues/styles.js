@@ -1,18 +1,39 @@
 import styled from 'styled-components';
 
 export const PersonContainer = styled.li`
+  flex-grow: 0;
+  flex-shrink: 0;
+
   display: flex;
   list-style: none;
-  width: 200px;
   margin: 10px;
   background-color: white;
   border: 1px solid black;
   flex-direction: column;
   padding: 12px 8px;
-  flex-grow: 1;
   border: 1px solid lightgray;
   box-shadow: 0px 1px 5px 0px #bdbdbd;
   border-radius: 5px;
+  margin: 5px;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    flex-grow: 0;
+    flex-shrink: 1;
+  }
+
+  @media (min-width: 481px) {
+    width: 445px;
+  }
+
+  @media (min-width: 568px) {
+    width: 259px;
+  }
+
+  @media (min-width: 810px) {
+    width: 250px;
+  }
+
   img {
     width: 100%;
     border: 1px solid #e8e8e8;
@@ -23,10 +44,12 @@ export const PersonContainer = styled.li`
 export const StyledList = styled.ul`
   display: flex;
   width: 100%;
-  padding: 0 20px;
+  padding: 30px 0;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding: 5px;
 `;
+
 export const Text = styled.p`
   padding: 4px;
 `;

@@ -15,3 +15,9 @@ img {
   margin: 0;
   padding: 0;
 }
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

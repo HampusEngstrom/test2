@@ -32,3 +32,42 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 480px) {
+  .App {
+    min-width: 300px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 481px) {
+  .App {
+    width: 100%;
+    max-width: 466px;
+  }
+}
+
+@media (min-width: 568px) {
+  .App {
+    max-width: 548px;
+  }
+}
+
+@media (min-width: 810px) {
+  .App {
+    max-width: 790px;
+  }
+}
+
+@media (min-width: 1070px) {
+  .App {
+    max-width: 1050px;
+  }
+}
+
+@media (min-width: 1330px) {
+  .App {
+    width: 100%;
+    max-width: 1310px;
+  }
+}
