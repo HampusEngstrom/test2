@@ -19,6 +19,11 @@ const PaginationList = styled.ul`
     &.active {
       background-color: #5d5d5d;
     }
+    &#prev-page,
+    &#next-page {
+      background-color: unset;
+      color: black;
+    }
   }
 `;
 
@@ -38,25 +43,44 @@ const Pagination = (props) => {
     return new Array(nbrOfPages).fill(0);
   };
 
-  const clickPagination = (activePage) => () => {
-    setActivePage(activePage);
+  const clickPagination = (page) => () => {
+    if (page === activePage) {
+      return;
+    }
+    setActivePage(page);
     window.scrollTo(0, 0);
   };
-
+  const pages = getPages();
   return (
     <div>
       {props.render({ items })}
       <PaginationList data-testid="pagination-list">
-        {getPages().map((_, index) => (
+        <li
+          id={'prev-page'}
+          onClick={clickPagination(Math.max(activePage - 1, 0))}
+          data-testid={'prev-page'}
+        >
+          &#8249;
+        </li>
+        {pages.map((_, index) => (
           <li
             key={index}
-            id={'page-' + index + 1}
+            id={'page-' + (index + 1)}
             onClick={clickPagination(index)}
             className={activePage === index ? 'active' : ''}
           >
             {index + 1}
           </li>
         ))}
+        <li
+          id={'next-page'}
+          data-testid={'next-page'}
+          onClick={clickPagination(
+            Math.min(activePage + 1, pages.length - 1),
+          )}
+        >
+          &#8250;
+        </li>
       </PaginationList>
     </div>
   );
