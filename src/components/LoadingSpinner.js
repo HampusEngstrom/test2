@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import Spinner from './../assets/loading_spinner.gif';
 
 const LoadingSpinnerContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
