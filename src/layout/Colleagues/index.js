@@ -26,7 +26,7 @@ const Person = ({ item }) => (
 const List = ({ items }) => (
   <StyledList data-testid="list">
     {items.map((item, index) => (
-      <Person key={index} item={item} />
+      <Person key={item.name + ' ' + index} item={item} />
     ))}
   </StyledList>
 );
