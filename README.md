@@ -75,22 +75,39 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # Tasks
 
-\_design/accessibility
+## \_design/accessibility
 
-- 2pt Responsive design, works on mobile and tablets
-- 1pt No UI framework used (such as Bootstrap, Ant)
+### 2pt Responsive design, works on mobile and tablets
 
-\_functionality
+- Responsive design is a good way to handle multiple devices.
 
-- 1pt Sort by name and office
-- 2pt Only render a set of profiles using either infinity scroll, pagination or a load more button
+### 1pt No UI framework used (such as Bootstrap, Ant)
 
-\_testing/QA
+- Not needed to solve this.
 
-- 2pt End-to-end testing (with an existing framework)
-- 2pt Unit tests for existing functionality (reasonable coverage)
+## \_functionality
+
+### 1pt Sort by name and office
+
+- Needed some functionality, sort seems basic and trivial.
+
+### 2pt Only render a set of profiles using either infinity scroll, pagination or a load more button
+
+- Better for performance to not load all of the items at once.
+
+## \_testing/QA
+
+### 2pt End-to-end testing (with an existing framework)
+
+- E2E is a good way to find issues in the application that includes multiple components, that aligns more with the user interaction, experience and journey.
+
+### 2pt Unit tests for existing functionality (reasonable coverage)
+
+- Unit testing is a fast great way to test code. Unit testing and E2E testing is a good combination for an increased quality
 
 # Design
+
+React is my main framework, I like it since it is fast and it scales in a good way. If this project were to grow, i would consider including Redux for state management, but I don't think it is necessary at this stage.
 
 - App.js fetches the data and pass it on to Colleagues.js if successfully fetched. App.js conditionally renders the loading spinner during fetching, Colleagues if success and Error if data could not be fetched.
 - DropDown.js is made stateless, to be reusable and used as widely as possible.
@@ -100,7 +117,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 I've tried to test the components and features as much as possible, using unit tests, integration tests and e2e tests.
 
+I try to keep master clean, running all tests on commit hook. Usually, dev and test would have to approve my pull request before merging the feature branch into master.
+
+![Overview](./Diagram.png)
+
 # Backlog
 
-- Handling missing images
-- Loading spinner when loading colleagues
+- Handle broken images
+- Show loading spinner when loading colleagues
