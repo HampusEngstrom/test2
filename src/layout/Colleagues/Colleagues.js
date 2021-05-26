@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Pagination from '../../components/Pagination';
-import Toolbar from '../Toolbar/Toolbar';
+import Toolbar from '../../feature/Toolbar/Toolbar';
 import { Header } from './styles';
 import List from './PersonList';
 

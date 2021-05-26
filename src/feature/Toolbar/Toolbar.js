@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import DropDown from '../../components/DropDown';
-import { sortBy } from '../../helpers';
+import { sortBy } from '../../helpers/helpers';
 
 const Container = styled.div`
   background-color: white;
