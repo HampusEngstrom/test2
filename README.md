@@ -121,6 +121,8 @@ I try to keep master clean, running all tests on commit hook. Usually, dev and t
 
 ![Overview](./Diagram.png)
 
+Separating the logic from the presentational components makes it easier to replace and extend the code. If we were to add a new list, if we want to replace Pagination with InfinityScroll, the pattern would be the same. Extending logic with filtering etc would be done in the Toolbar.
+
 # Backlog
 
 - Handle broken images
